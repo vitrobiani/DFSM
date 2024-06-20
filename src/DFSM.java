@@ -54,7 +54,7 @@ public class DFSM {
         transitions.verifyNoEpsilonTransitions();
     }
 
-    protected DFSM() {
+    private DFSM() {
         // for internal use
     }
 
@@ -426,6 +426,12 @@ and all the non accepting states in the second. */
      * @return a boolean that indicates if the input is a member of this machine's language or not
      */
     public boolean compute(String input) {
-        throw new RuntimeException("Shoud not run");
+        //throw new RuntimeException("Shoud not run");
+        State curState = initialState;
+        for (int i = 0; i < input.length(); i++) {
+            curState = transitions.applyTo(curState, input.charAt(i));
+        }
+
+        return acceptingStates.contains(curState);
     }
 }
